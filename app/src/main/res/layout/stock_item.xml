@@ -4,13 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/list_item"
     android:layout_width="match_parent"
-    android:layout_height="30dp"
+    android:layout_height="35dp"
     android:background="@color/colorAccent"
     android:orientation="horizontal"
     android:textAlignment="center">
 
     <TextView
-        android:id="@+id/symbol"
+        android:id="@+id/symbol_txt"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1.4"
@@ -19,7 +19,7 @@
         tools:text="Halk Bank" />
 
     <TextView
-        android:id="@+id/price"
+        android:id="@+id/price_txt"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1"
@@ -28,7 +28,7 @@
         tools:text="2.45" />
 
     <TextView
-        android:id="@+id/difference"
+        android:id="@+id/difference_txt"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1"
@@ -37,7 +37,7 @@
         tools:text="0.02" />
 
     <TextView
-        android:id="@+id/volume"
+        android:id="@+id/volume_txt"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1"
@@ -46,7 +46,7 @@
         tools:text="580" />
 
     <TextView
-        android:id="@+id/bid"
+        android:id="@+id/bid_txt"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1"
@@ -55,7 +55,7 @@
         tools:text="0.51" />
 
     <TextView
-        android:id="@+id/offer"
+        android:id="@+id/offer_txt"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1"
@@ -64,7 +64,7 @@
         tools:text="0.54" />
 
     <TextView
-        android:id="@+id/change"
+        android:id="@+id/change_txt"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1.2"

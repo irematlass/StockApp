@@ -3,7 +3,9 @@ package com.app.mystockapp.di
 import android.content.Context
 import androidx.room.Room
 import com.app.mystockapp.api.RetrofitAPI
+import com.app.mystockapp.db.StockDao
 import com.app.mystockapp.db.StockDatabase
+import com.app.mystockapp.repo.StockRepository
 import com.app.mystockapp.util.Util.BASE_URL
 import dagger.Module
 import dagger.Provides
@@ -38,4 +40,8 @@ object AppModule {
             .addConverterFactory(GsonConverterFactory.create())
             .baseUrl(BASE_URL).build().create(RetrofitAPI::class.java)
     }
+
+    @Singleton
+    @Provides
+    fun injectRepository(dao:StockDao,api:RetrofitAPI)=StockRepository(dao,api)
 }

@@ -11,7 +11,7 @@ data class Stock(
     val bid: Double,
     @ColumnInfo(name = "difference")
     val difference: Double,
-   @PrimaryKey @ColumnInfo(name = "stock_id") @SerializedName("id")
+    @PrimaryKey @ColumnInfo(name = "stock_id") @SerializedName("id")
     var uid: Int,
     @ColumnInfo(name = "isDown")
     val isDown: Boolean,
@@ -27,3 +27,12 @@ data class Stock(
     val volume: Double
 )
 
+data class StockRequest (
+    @SerializedName("period")
+   val period: String
+)
+data class StockResponse (
+    val stocks:ArrayList<Stock>,
+    val status: Status
+
+)

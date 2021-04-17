@@ -27,5 +27,9 @@
         android:id="@+id/stockDetailFragment"
         android:name="com.app.mystockapp.view.StockDetailFragment"
         android:label="fragment_stock_detail"
-        tools:layout="@layout/fragment_stock_detail" />
+        tools:layout="@layout/fragment_stock_detail" >
+        <argument
+            android:name="stockId"
+            app:argType="integer" />
+    </fragment>
 </navigation>

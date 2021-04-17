@@ -32,3 +32,7 @@ data class Error (
     val code: Int,
     val message: String
 )
+data class DetailRequest (
+
+    val id: String
+)
