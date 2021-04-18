@@ -22,6 +22,10 @@
         <action
             android:id="@+id/action_stockListFragment_to_stockDetailFragment"
             app:destination="@id/stockDetailFragment" />
+        <argument
+            android:name="period"
+            app:argType="string"
+            android:defaultValue="all" />
     </fragment>
     <fragment
         android:id="@+id/stockDetailFragment"

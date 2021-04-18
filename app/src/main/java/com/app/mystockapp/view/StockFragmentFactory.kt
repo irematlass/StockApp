@@ -7,11 +7,11 @@ import javax.inject.Inject
 
 class StockFragmentFactory @Inject constructor(
     val stockRecyclerAdapter: StockRecyclerAdapter
-):FragmentFactory(){
+) : FragmentFactory() {
     override fun instantiate(classLoader: ClassLoader, className: String): Fragment {
-        return when(className){
-            StockListFragment::class.java.name->StockListFragment(stockRecyclerAdapter)
-            else->super.instantiate(classLoader, className)
+        return when (className) {
+            StockListFragment::class.java.name -> StockListFragment(stockRecyclerAdapter)
+            else -> super.instantiate(classLoader, className)
         }
 
     }

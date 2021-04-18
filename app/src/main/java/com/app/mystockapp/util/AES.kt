@@ -5,7 +5,7 @@ import javax.crypto.Cipher
 import javax.crypto.spec.IvParameterSpec
 import javax.crypto.spec.SecretKeySpec
 
-class AES {
+object AES {
     fun encrypt(value: String, aesKey: String, aesIV: String): String {
 
         val cipher = Cipher.getInstance("AES/CBC/PKCS7Padding")
@@ -18,7 +18,7 @@ class AES {
         return Base64.encodeToString(encryptedPeriod, Base64.DEFAULT)
     }
 
-    fun decrypt(value:String,aesKey: String, aesIV: String):String{
+    fun decrypt(value: String, aesKey: String, aesIV: String): String {
         val cipher = Cipher.getInstance("AES/CBC/PKCS7Padding")
         cipher.init(
             Cipher.DECRYPT_MODE,

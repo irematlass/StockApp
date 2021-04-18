@@ -8,12 +8,14 @@ import com.app.mystockapp.model.Stock
 interface StockDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertStocks(stock:Stock)
+    suspend fun insertStocks(stock: Stock)
 
-    @Delete
-    suspend fun deleteStocks(stock:Stock)
+    @Query("DELETE FROM stockTable")
+    suspend fun deleteStocks()
 
     @Query("SELECT * FROM stockTable  WHERE symbol LIKE '%' ||:searchWord|| '%'")
-    fun searchStocks(searchWord:String): LiveData<List<Stock>>
+    suspend fun searchStocks(searchWord: String): List<Stock>
 
+    @Query("SELECT * FROM stockTable")
+    suspend fun getStocks(): List<Stock>
 }

@@ -12,6 +12,7 @@ class SharedPreferencesHelper(private val context: Context) {
     }
 
     fun getSharedPreference(key: String?, defaultValue: String?): String? {
-        return context.getSharedPreferences("PREF", Context.MODE_PRIVATE).getString(key, defaultValue)
+        return context.getSharedPreferences("PREF", Context.MODE_PRIVATE)
+            .getString(key, defaultValue)
     }
 }

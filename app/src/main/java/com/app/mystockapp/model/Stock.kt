@@ -22,17 +22,18 @@ data class Stock(
     @ColumnInfo(name = "price")
     val price: Double,
     @ColumnInfo(name = "symbol")
-    val symbol: String,
+    var symbol: String,
     @ColumnInfo(name = "volume")
     val volume: Double
 )
 
-data class StockRequest (
+data class StockRequest(
     @SerializedName("period")
-   val period: String
+    val period: String
 )
-data class StockResponse (
-    val stocks:ArrayList<Stock>,
+
+data class StockResponse(
+    val stocks: ArrayList<Stock>,
     val status: Status
 
 )

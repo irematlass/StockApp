@@ -24,7 +24,7 @@ object AppModule {
     @Provides
     fun injectRoomDatabase(
         @ApplicationContext context: Context
-    ) = Room.databaseBuilder(context,StockDatabase::class.java,"StocksDB").build()
+    ) = Room.databaseBuilder(context, StockDatabase::class.java, "StocksDB").build()
 
     @Singleton
     @Provides
@@ -35,7 +35,7 @@ object AppModule {
 
     @Singleton
     @Provides
-    fun injectRetrofitAPI() : RetrofitAPI {
+    fun injectRetrofitAPI(): RetrofitAPI {
         return Retrofit.Builder()
             .addConverterFactory(GsonConverterFactory.create())
             .baseUrl(BASE_URL).build().create(RetrofitAPI::class.java)
@@ -43,5 +43,5 @@ object AppModule {
 
     @Singleton
     @Provides
-    fun injectRepository(dao:StockDao,api:RetrofitAPI)=StockRepository(dao,api)
+    fun injectRepository(dao: StockDao, api: RetrofitAPI) = StockRepository(dao, api)
 }

@@ -10,60 +10,71 @@ import java.lang.RuntimeException
 import javax.inject.Inject
 
 class StockRepository @Inject constructor(
-    private val stockDao:StockDao,
+    private val stockDao: StockDao,
     private val retrofitAPI: RetrofitAPI
 ) {
-    suspend fun insertStocks(stock:Stock){
+    suspend fun insertStocks(stock: Stock) {
         stockDao.insertStocks(stock)
     }
-    suspend fun deleteStocks(stock:Stock){
-        stockDao.deleteStocks(stock)
+
+    suspend fun deleteStocks() {
+        stockDao.deleteStocks()
     }
-    fun getStocks(searchWord:String):LiveData<List<Stock>>{
+
+    suspend fun getStocksFilter(searchWord: String): List<Stock> {
         return stockDao.searchStocks(searchWord)
     }
-    suspend fun handshake(request: HandshakeRequest):Resource<HandshakeResponse> {
+    suspend fun getStocks(): List<Stock> {
+        return stockDao.getStocks()
+    }
+
+    suspend fun handshake(request: HandshakeRequest): Resource<HandshakeResponse> {
         return try {
-            val response=retrofitAPI.handshakeStart(request)
-            if (response.isSuccessful){
-                response.body()?.let{
+            val response = retrofitAPI.handshakeStart(request)
+            if (response.isSuccessful) {
+                response.body()?.let {
                     return@let Resource.success(it)
-                }?:Resource.error("Error",null)
-            }else{
-                Resource.error("Error",null)
+                } ?: Resource.error("Error", null)
+            } else {
+                Resource.error("Error", null)
             }
-        }catch (e:Exception){
-            Resource.error("No data!",null)
+        } catch (e: Exception) {
+            Resource.error("No data!", null)
 
         }
     }
-    suspend fun getStockList(authorizationKey:String,period:StockRequest):Resource<StockResponse>{
+
+    suspend fun getStockList(
+        authorizationKey: String,
+        period: StockRequest
+    ): Resource<StockResponse> {
         return try {
-            val response=retrofitAPI.getStockList(authorizationKey,period)
-            if (response.isSuccessful){
-                response.body()?.let{
+            val response = retrofitAPI.getStockList(authorizationKey, period)
+            if (response.isSuccessful) {
+                response.body()?.let {
                     return@let Resource.success(it)
-                }?:Resource.error("Error",null)
-            }else{
-                Resource.error("Error",null)
+                } ?: Resource.error("Error", null)
+            } else {
+                Resource.error("Error", null)
             }
-        }catch (e:Exception){
-            Resource.error(e.toString(),null)
+        } catch (e: Exception) {
+            Resource.error(e.toString(), null)
 
         }
     }
-    suspend fun getStockDetail(authorizationKey:String,id:DetailRequest):Resource<StockDetail>{
+
+    suspend fun getStockDetail(authorizationKey: String, id: DetailRequest): Resource<StockDetail> {
         return try {
-            val response=retrofitAPI.getStockDetail(authorizationKey,id)
-            if (response.isSuccessful){
-                response.body()?.let{
+            val response = retrofitAPI.getStockDetail(authorizationKey, id)
+            if (response.isSuccessful) {
+                response.body()?.let {
                     return@let Resource.success(it)
-                }?:Resource.error("Error",null)
-            }else{
-                Resource.error("Error",null)
+                } ?: Resource.error("Error", null)
+            } else {
+                Resource.error("Error", null)
             }
-        }catch (e:Exception){
-            Resource.error("No data!",null)
+        } catch (e: Exception) {
+            Resource.error("No data!", null)
 
         }
     }

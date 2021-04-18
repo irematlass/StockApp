@@ -15,7 +15,8 @@ import com.app.mystockapp.view.StockListFragmentDirections
 import kotlinx.android.synthetic.main.stock_item.view.*
 import javax.inject.Inject
 
-class StockRecyclerAdapter @Inject constructor(): RecyclerView.Adapter<StockRecyclerAdapter.StockViewHolder>() {
+class StockRecyclerAdapter @Inject constructor() :
+    RecyclerView.Adapter<StockRecyclerAdapter.StockViewHolder>() {
     class StockViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
 
 
@@ -27,7 +28,7 @@ class StockRecyclerAdapter @Inject constructor(): RecyclerView.Adapter<StockRecy
         override fun areContentsTheSame(oldItem: Stock, newItem: Stock): Boolean {
             return oldItem == newItem
         }
-}
+    }
 
     private val recyclerListDiffer = AsyncListDiffer(this, diffUtil)
 
@@ -46,20 +47,20 @@ class StockRecyclerAdapter @Inject constructor(): RecyclerView.Adapter<StockRecy
 
     override fun onBindViewHolder(holder: StockViewHolder, position: Int) {
         val symbolText = holder.itemView.findViewById<TextView>(R.id.symbol_txt)
-        val priceText=holder.itemView.findViewById<TextView>(R.id.price_txt)
+        val priceText = holder.itemView.findViewById<TextView>(R.id.price_txt)
         val differenceText = holder.itemView.findViewById<TextView>(R.id.difference_txt)
-        val volumeText=holder.itemView.findViewById<TextView>(R.id.volume_txt)
+        val volumeText = holder.itemView.findViewById<TextView>(R.id.volume_txt)
         val bidText = holder.itemView.findViewById<TextView>(R.id.bid_txt)
-        val offerText=holder.itemView.findViewById<TextView>(R.id.offer_txt)
+        val offerText = holder.itemView.findViewById<TextView>(R.id.offer_txt)
         val changeText = holder.itemView.findViewById<TextView>(R.id.change_txt)
-        val stock=stocks[position]
+        val stock = stocks[position]
         holder.itemView.apply {
-            symbolText.text=stock.symbol
-            priceText.text=stock.price.toString()
-            differenceText.text=stock.difference.toString()
-            volumeText.text=stock.volume.toString()
-            bidText.text=stock.bid.toString()
-            offerText.text=stock.offer.toString()
+            symbolText.text = stock.symbol
+            priceText.text = stock.price.toString()
+            differenceText.text = stock.difference.toString()
+            volumeText.text = stock.volume.toString()
+            bidText.text = stock.bid.toString()
+            offerText.text = stock.offer.toString()
             if (stock.isUp) {
                 changeText.text = "▲"
                 changeText.setTextColor(Color.GREEN)
@@ -73,7 +74,8 @@ class StockRecyclerAdapter @Inject constructor(): RecyclerView.Adapter<StockRecy
 
         }
         holder.itemView.setOnClickListener {
-            val action=StockListFragmentDirections.actionStockListFragmentToStockDetailFragment(stock.uid)
+            val action =
+                StockListFragmentDirections.actionStockListFragmentToStockDetailFragment(stock.uid)
             Navigation.findNavController(it).navigate(action)
         }
 

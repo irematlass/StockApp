@@ -9,20 +9,20 @@ interface RetrofitAPI {
     @Headers("Content-Type: application/json")
     suspend fun handshakeStart(
         @Body request: HandshakeRequest
-    ) : Response<HandshakeResponse>
+    ): Response<HandshakeResponse>
 
     @POST("api/stocks/list")
     @Headers("Content-Type: application/json")
     suspend fun getStockList(
-        @Header("X-VP-Authorization") XVPAuthorization:String,
+        @Header("X-VP-Authorization") XVPAuthorization: String,
         @Body request: StockRequest
-    ):Response<StockResponse>
+    ): Response<StockResponse>
 
     @POST("api/stocks/detail")
     @Headers("Content-Type: application/json")
     suspend fun getStockDetail(
-        @Header("X-VP-Authorization") XVPAuthorization:String,
+        @Header("X-VP-Authorization") XVPAuthorization: String,
         @Body request: DetailRequest
-    ):Response<StockDetail>
+    ): Response<StockDetail>
 
 }

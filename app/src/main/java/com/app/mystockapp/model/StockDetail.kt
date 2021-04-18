@@ -1,6 +1,6 @@
 package com.app.mystockapp.model
 
-data class StockDetail (
+data class StockDetail(
 
     val bid: Double,
     val channge: Double,
@@ -19,20 +19,23 @@ data class StockDetail (
     val symbol: String,
     val volume: Double
 )
-data class Graphic (
+
+data class Graphic(
     val day: Int,
     val value: Double
 )
+
 data class Status(
     val error: Error,
     val isSuccess: Boolean
 )
 
-data class Error (
+data class Error(
     val code: Int,
     val message: String
 )
-data class DetailRequest (
+
+data class DetailRequest(
 
     val id: String
 )
