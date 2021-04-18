@@ -73,13 +73,13 @@ class StockDetailFragment : Fragment(R.layout.fragment_stock_detail) {
                         fragmentBinding?.detailVolume!!.text = "Hacim: " + detail.volume
                         fragmentBinding?.detailSymbol!!.text = "Sembol: " + symboltxt
                         if (detail.isUp) {
-                            fragmentBinding?.detailChange!!.text = "Sembol:  ▲"
+                            fragmentBinding?.detailChange!!.text = "Değişim:  ▲"
                             fragmentBinding?.detailChange!!.setTextColor(Color.GREEN)
                         } else if (detail.isDown) {
-                            fragmentBinding?.detailChange!!.text = "Sembol: ▼"
+                            fragmentBinding?.detailChange!!.text = "Değişim: ▼"
                             fragmentBinding?.detailChange!!.setTextColor(Color.RED)
                         } else {
-                            fragmentBinding?.detailChange!!.text = "Sembol: ━"
+                            fragmentBinding?.detailChange!!.text = "Değişim: ━"
                             fragmentBinding?.detailChange!!.setTextColor(Color.YELLOW)
                         }
                     } else {

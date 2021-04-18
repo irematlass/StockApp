@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.app.mystockapp.view.HomeFragment"
-        android:label="fragment_home"
+        android:label="@string/app_name"
         tools:layout="@layout/fragment_home" >
         <action
             android:id="@+id/action_homeFragment_to_stockListFragment"
@@ -17,7 +17,7 @@
     <fragment
         android:id="@+id/stockListFragment"
         android:name="com.app.mystockapp.view.StockListFragment"
-        android:label="fragment_stock_list"
+        android:label="@string/app_name"
         tools:layout="@layout/fragment_stock_list" >
         <action
             android:id="@+id/action_stockListFragment_to_stockDetailFragment"
@@ -30,7 +30,7 @@
     <fragment
         android:id="@+id/stockDetailFragment"
         android:name="com.app.mystockapp.view.StockDetailFragment"
-        android:label="fragment_stock_detail"
+        android:label="@string/app_name"
         tools:layout="@layout/fragment_stock_detail" >
         <argument
             android:name="stockId"

@@ -74,8 +74,7 @@ class StockRecyclerAdapter @Inject constructor() :
 
         }
         holder.itemView.setOnClickListener {
-            val action =
-                StockListFragmentDirections.actionStockListFragmentToStockDetailFragment(stock.uid)
+            val action = StockListFragmentDirections.actionStockListFragmentToStockDetailFragment(stock.uid)
             Navigation.findNavController(it).navigate(action)
         }
 

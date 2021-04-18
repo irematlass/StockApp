@@ -35,39 +35,48 @@ class StockViewModel @ViewModelInject constructor(
         handshakeResponse.value = response
     }
 
-    fun getStockList(key: String, period: StockRequest,aeskey:String,aesıv:String) = viewModelScope.launch {
-        try {
-
-
-      var response = repository.getStockList(key, period)
-        if (response.data!!.status.isSuccess){
-            storeInSQLite(response.data!!.stocks,aeskey,aesıv)
+    fun getStockList(key: String, period: StockRequest, aeskey: String, aesıv: String) =
+        viewModelScope.launch {
+            try {
+                var response = repository.getStockList(key, period)
+                if (response.data!!.status.isSuccess) {
+                    storeInSQLite(response.data!!.stocks, aeskey, aesıv)
+                }
+                var stockList = repository.getStocks()
+                stocks.postValue(Resource.success(stockList))
+            } catch (e: Exception) {
+                stocks.postValue(
+                    Resource.error(
+                        "An error occurred, please try again: ${e.message}",
+                        emptyList()
+                    )
+                )
+            }
         }
-        var stockList=repository.getStocks()
-        stocks.postValue(Resource.success(stockList))
-        }catch (e:Exception){
-            stocks.postValue(Resource.error("An error occurred, please try again: ${e.message}",
-                emptyList()))
-        }
-    }
 
     fun getStockDetail(key: String, id: DetailRequest) = viewModelScope.launch {
         stockDetail.value = repository.getStockDetail(key, id)
     }
-    fun getFilterStocks(word:String)=viewModelScope.launch {
+
+    fun getFilterStocks(word: String) = viewModelScope.launch {
         stocks.postValue(Resource.success(repository.getStocksFilter(word)))
     }
-    fun getStocks()=viewModelScope.launch {
+
+    fun getStocks() = viewModelScope.launch {
         stocks.postValue(Resource.success(repository.getStocks()))
     }
-    private fun storeInSQLite(stock:List<Stock>,aeskey:String,aesıv:String){
-        viewModelScope.launch{
-            //repository.deleteStocks()
+
+    private fun storeInSQLite(stock: List<Stock>, aeskey: String, aesıv: String) {
+        viewModelScope.launch {
+            var stockList = repository.getStocks()
+            if(stockList.size>0) {
+                repository.deleteStocks()
+            }
             stock.forEach {
-               var value=AES.decrypt(it.symbol,aeskey,aesıv)
-                Log.d("decrypt",value)
-                it.symbol=value
-                var temp=repository.insertStocks(it)
+                var value = AES.decrypt(it.symbol, aeskey, aesıv)
+                Log.d("decrypt", value)
+                it.symbol = value
+                var temp = repository.insertStocks(it)
             }
 
         }

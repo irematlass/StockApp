@@ -24,10 +24,8 @@ class MainActivity : AppCompatActivity() , NavigationView.OnNavigationItemSelect
     lateinit var fragmentFactory: StockFragmentFactory
 
     private lateinit var navController :NavController
-    private lateinit var drawerLayout:DrawerLayout
-    private lateinit var appBarConfiguration:AppBarConfiguration
 
-    override fun onCreate(savedInstanceState: Bundle?) {
+override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         supportFragmentManager.fragmentFactory = fragmentFactory
@@ -73,12 +71,14 @@ class MainActivity : AppCompatActivity() , NavigationView.OnNavigationItemSelect
                 fragment.arguments = bundleOf("period" to "all")
                 supportFragmentManager.beginTransaction().replace(R.id.fragment, fragment)
                     .commit()
+
             }
 
             R.id.nav_rising -> {
                 fragment.arguments = bundleOf("period" to "increasing")
                 supportFragmentManager.beginTransaction().replace(R.id.fragment, fragment)
                     .commit()
+
             }
 
             R.id.nav_falling -> {

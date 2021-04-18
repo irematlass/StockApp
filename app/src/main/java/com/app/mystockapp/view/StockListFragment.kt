@@ -1,6 +1,7 @@
 package com.app.mystockapp.view
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.View
 import android.widget.Toast
@@ -27,19 +28,24 @@ class StockListFragment @Inject constructor(
     private var fragmentBinding: FragmentStockListBinding? = null
     lateinit var viewModel: StockViewModel
 
+    private var periodString=""
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         var sp = SharedPreferencesHelper(requireContext())
         viewModel = ViewModelProvider(requireActivity()).get(StockViewModel::class.java)
 
+        arguments?.let {
+            periodString = StockListFragmentArgs.fromBundle(it).period
+        }
 
         var key = sp.getSharedPreference("Authorization", "")
         var aesIV = sp.getSharedPreference("aesIV", "")
         var aesKey = sp.getSharedPreference("aesKey", "")
-        var period = AES.encrypt("all", aesKey!!, aesIV!!)
-
-        viewModel.getStockList(key!!, StockRequest(period),aesKey,aesIV)
+        var period = AES.encrypt(periodString, aesKey!!, aesIV!!)
+        Log.d("authperiod",period)
+        viewModel.getStockList(key!!, StockRequest(period), aesKey, aesIV)
         val binding = FragmentStockListBinding.bind(view)
         fragmentBinding = binding
 
@@ -54,12 +60,8 @@ class StockListFragment @Inject constructor(
         viewModel.stockList.observe(viewLifecycleOwner, Observer {
             when (it.status) {
                 Status.SUCCESS -> {
-
-
-                        stockRecyclerAdapter!!.stocks = it.data!!
-                        fragmentBinding?.progressBar?.visibility = View.GONE
-
-
+                    stockRecyclerAdapter!!.stocks = it.data!!
+                    fragmentBinding?.progressBar?.visibility = View.GONE
                 }
 
                 Status.ERROR -> {
@@ -76,8 +78,10 @@ class StockListFragment @Inject constructor(
             }
         })
     }
+
     fun filterList() {
-        fragmentBinding?.stockListSearch!!.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+        fragmentBinding?.stockListSearch!!.setOnQueryTextListener(object :
+            SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(value: String?): Boolean {
                 if (value != null && value != "") {
                     viewModel.getFilterStocks(value)
@@ -88,7 +92,7 @@ class StockListFragment @Inject constructor(
 
             override fun onQueryTextChange(newText: String?): Boolean {
                 if (newText == "") {
-                  viewModel.getStocks()
+                    viewModel.getStocks()
 
                 }
                 return false
@@ -97,6 +101,7 @@ class StockListFragment @Inject constructor(
         })
 
     }
+
     override fun onDestroyView() {
         fragmentBinding = null
         super.onDestroyView()
